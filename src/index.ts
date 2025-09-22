@@ -26,11 +26,11 @@ app.use('/api', reservationRouter);
 
 
 // To create admin user (run once):
-async function createAdmin() {
-  const hashed = bcrypt.hashSync('password123', 10);
-  await prisma.user.create({ data: { username: 'admin', password: hashed, role: 'admin' } });
-}
-createAdmin();
+// async function createAdmin() {
+//   const hashed = bcrypt.hashSync('password123', 10);
+//   await prisma.user.create({ data: { username: 'admin', password: hashed, role: 'admin' } });
+// }
+// createAdmin();
 
 // Start the server
 const PORT = process.env.PORT || 3000;
