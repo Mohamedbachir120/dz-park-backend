@@ -46,7 +46,7 @@ interface AuthRequest extends Request {
       /// Send email notification to client about status update
       const mailOptions = {
         from: "info@matarpark.com",
-        to: "info@matarpark.com",
+        to: reservation.client.email,
         subject: 'Reservation Status Updated',
         text: `Dear ${reservation.client.fullName},\n\nYour reservation status has been updated to: ${status}.\n\nThank you for using our service!\n\nBest regards,\nAero Park Team`,
       };
