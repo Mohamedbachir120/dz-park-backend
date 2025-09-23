@@ -315,7 +315,7 @@ export const createReservation = async (req: Request, res: Response) => {
 
     // Email to client with PDF attachment
     await transporter.sendMail({
-      from: process.env.EMAIL_FROM,
+      from: "info@matarpark.com",
       to: data.email,
       subject: 'Confirmation de votre réservation - Bon de commande',
       text: `Votre réservation ${reservation.reservationNumber} pour un total de ${totalPrice} DZD a été créée avec succès. Veuillez trouver votre bon de commande en pièce jointe.`,
@@ -330,8 +330,8 @@ export const createReservation = async (req: Request, res: Response) => {
 
     // Email to admin
     await transporter.sendMail({
-      from: process.env.EMAIL_FROM,
-      to: process.env.ADMIN_EMAIL,
+      from: "info@matarpark.com",
+      to: "info@matarpark.com",
       subject: 'Nouvelle réservation créée',
       text: `Une nouvelle réservation a été créée par ${data.fullName}. Numéro: ${reservation.reservationNumber}, Total: ${totalPrice} DZD.`,
       attachments: [
