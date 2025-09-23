@@ -58,3 +58,24 @@ interface AuthRequest extends Request {
       res.status(500).json({ error: 'Server error' });
     }
   }
+
+  export const downloadBonDeCommande = async (req: AuthRequest, res: Response) => {
+    if (req.user?.role !== 'admin') return res.status(403).json({ error: 'Forbidden' });
+  
+    const { id } = req.params;
+  
+    try {
+      const reservation = await prisma.reservation.findUnique({
+        where: { id },
+        select: { bonDeCommandePath: true },
+      });
+  
+      if (!reservation || !reservation.bonDeCommandePath) {
+        return res.status(404).json({ error: 'Bon de commande not found' });
+      }
+  
+      res.download(reservation.bonDeCommandePath);
+    } catch (error) {
+      res.status(500).json({ error: 'Server error' });
+    }
+  }
