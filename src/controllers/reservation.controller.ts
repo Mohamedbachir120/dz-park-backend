@@ -126,6 +126,8 @@ const generateBonDeCommande = async (reservation: any, client: any): Promise<str
          .text(`${parkingTotal} DZD`, 450, y);
       y += 15;
 
+      
+
       // Oversized supplement
       if (reservation.isOversized) {
         doc.text('Supplément véhicule surdimensionné', 50, y)
@@ -160,6 +162,13 @@ const generateBonDeCommande = async (reservation: any, client: any): Promise<str
            .text('1000 DZD', 450, y);
         y += 15;
       }
+
+      doc.text('Frais de déplacement aller / retour', 50, y)
+          .text('1', 250, y)
+          .text('500 DZD', 350, y)
+          .text('500 DZD', 450, y);
+      y += 15;
+    
 
       // Discount for long stays
       if (diffDays > 5) {
@@ -275,6 +284,7 @@ export const createReservation = async (req: Request, res: Response) => {
     let totalPrice = diffDays * dailyRate;
     const cleaningPrices = { none: 0, exterior: 800, interior: 600, full: 1200 };
     totalPrice += cleaningPrices[data.cleaningType];
+    totalPrice += 500;
     if (data.withFuel) totalPrice += 1000;
 
     // Generate unique reservationNumber
